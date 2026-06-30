@@ -29,8 +29,6 @@ import torch.nn.functional as F
 
 from transformers import SegformerForSemanticSegmentation
 
-from utils.input_selector import select_input_image
-
 # Optional GeoTIFF support
 try:
     import rasterio
