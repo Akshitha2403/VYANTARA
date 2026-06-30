@@ -1,0 +1,489 @@
+/* VYANTARA — ISRO-inspired dark geospatial dashboard */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+    --vy-bg-deep: #12090A;
+    --vy-bg-wine: #221313;
+    --vy-bg-brown: #3A2420;
+    --vy-card: rgba(58, 36, 32, 0.72);
+    --vy-card-border: rgba(120, 80, 70, 0.35);
+    --vy-card-hover: rgba(72, 44, 38, 0.85);
+    --vy-text-primary: #F2E8E4;
+    --vy-text-secondary: #C4A89E;
+    --vy-text-muted: #8A7268;
+    --vy-accent: #5B7C99;
+    --vy-accent-hover: #6E92B0;
+    --vy-accent-glow: rgba(91, 124, 153, 0.35);
+    --vy-success: #6B9080;
+    --vy-error: #C45C5C;
+}
+
+.stApp {
+    background: linear-gradient(
+        165deg,
+        var(--vy-bg-deep) 0%,
+        var(--vy-bg-wine) 42%,
+        var(--vy-bg-brown) 100%
+    ) !important;
+    background-attachment: fixed !important;
+    font-family: "Inter", sans-serif !important;
+    color: var(--vy-text-primary) !important;
+}
+
+.stApp::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.06;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 20% 30%, rgba(91, 124, 153, 0.15), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(120, 60, 50, 0.12), transparent 40%);
+    background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
+}
+
+.block-container {
+    position: relative;
+    z-index: 1;
+    padding-top: 1.5rem !important;
+    max-width: 100% !important;
+}
+
+#MainMenu,
+footer,
+header[data-testid="stHeader"] {
+    visibility: hidden;
+    height: 0;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, label, span,
+[data-testid="stMarkdownContainer"] {
+    color: var(--vy-text-primary);
+}
+
+.vy-title {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0.5rem 0 0.25rem;
+    background: linear-gradient(135deg, #F2E8E4 0%, #C4A89E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.vy-title-home {
+    font-size: 4.25rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    margin: 1.25rem 0 0.5rem;
+    line-height: 1.1;
+}
+
+.vy-subtitle {
+    text-align: center;
+    color: var(--vy-text-secondary) !important;
+    font-size: 1.12rem;
+    line-height: 1.75;
+    max-width: 720px;
+    margin: 1.25rem auto 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+.vy-description {
+    text-align: center;
+    color: var(--vy-text-muted) !important;
+    font-size: 1rem;
+    line-height: 1.85;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+}
+
+.vy-card {
+    background: var(--vy-card);
+    border: 1px solid var(--vy-card-border);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.vy-metric-card {
+    background: linear-gradient(145deg, rgba(58, 36, 32, 0.9), rgba(34, 19, 19, 0.85));
+    border: 1px solid var(--vy-card-border);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    text-align: center;
+    min-height: 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.vy-metric-card:hover {
+    border-color: rgba(91, 124, 153, 0.45);
+    transform: translateY(-1px);
+}
+
+.vy-metric-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--vy-text-muted) !important;
+    margin-bottom: 0.35rem;
+}
+
+.vy-metric-value {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--vy-text-primary) !important;
+    font-family: "JetBrains Mono", monospace;
+}
+
+.vy-section-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--vy-accent) !important;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.vy-stage-text {
+    font-size: 0.88rem;
+    color: var(--vy-text-secondary) !important;
+    font-family: "JetBrains Mono", monospace;
+    margin-top: 0.35rem;
+}
+
+.vy-gallery-item {
+    background: var(--vy-card);
+    border: 1px solid var(--vy-card-border);
+    border-radius: 12px;
+    padding: 0.75rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vy-gallery-item:hover {
+    border-color: var(--vy-accent);
+    box-shadow: 0 0 20px var(--vy-accent-glow);
+}
+
+.vy-gallery-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--vy-text-muted) !important;
+    margin-top: 0.5rem;
+}
+
+.vy-sidebar-brand {
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--vy-card-border);
+    margin-bottom: 1rem;
+}
+
+.vy-sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #FFFFFF !important;
+    margin-top: 0.25rem;
+}
+
+/* ——— Sidebar: dark cherry / burgundy ——— */
+div[data-testid="stSidebar"],
+section[data-testid="stSidebar"] > div {
+    background: linear-gradient(180deg, #4A1820 0%, #3A1218 45%, #2A0C10 100%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+div[data-testid="stSidebar"] p,
+div[data-testid="stSidebar"] label,
+div[data-testid="stSidebar"] span,
+div[data-testid="stSidebar"] small,
+div[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
+div[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
+    color: #FFFFFF !important;
+}
+
+div[data-testid="stSidebar"] .vy-section-title {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+div[data-testid="stSidebar"] .stRadio label,
+div[data-testid="stSidebar"] .stRadio [data-baseweb="radio"] {
+    color: #FFFFFF !important;
+}
+
+div[data-testid="stSidebar"] .stRadio div[role="radiogroup"] > label {
+    color: #FFFFFF !important;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0.35rem 0.5rem;
+}
+
+div[data-testid="stSidebar"] .stSelectbox label,
+div[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] > div {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #FFFFFF !important;
+}
+
+div[data-testid="stSidebar"] .stSelectbox svg {
+    fill: #FFFFFF !important;
+}
+
+div[data-testid="stSidebar"] .stFileUploader,
+div[data-testid="stSidebar"] .stFileUploader label,
+div[data-testid="stSidebar"] .stFileUploader small,
+div[data-testid="stSidebar"] .stFileUploader span {
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+div[data-testid="stSidebar"] .stFileUploader section {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+div[data-testid="stSidebar"] hr {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+div[data-testid="stSidebar"] .stButton > button[kind="secondary"] {
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+div[data-testid="stSidebar"] .stButton > button[kind="secondary"]:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+div[data-testid="stSidebar"] .vy-sidebar-brand {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+div[data-testid="stSidebar"] .logo-missing {
+    color: rgba(255, 255, 255, 0.7) !important;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.stButton > button {
+    background: linear-gradient(135deg, var(--vy-accent) 0%, #4A6678 100%) !important;
+    color: #F2E8E4 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 16px var(--vy-accent-glow) !important;
+}
+
+.stButton > button:hover {
+    background: linear-gradient(135deg, var(--vy-accent-hover) 0%, #5A7A8E 100%) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-1px);
+}
+
+.stButton > button:disabled {
+    background: rgba(58, 36, 32, 0.6) !important;
+    color: var(--vy-text-muted) !important;
+    box-shadow: none !important;
+    transform: none !important;
+    cursor: not-allowed !important;
+}
+
+.stButton > button[kind="secondary"] {
+    background: transparent !important;
+    border: 1px solid var(--vy-card-border) !important;
+    box-shadow: none !important;
+}
+
+.stProgress > div > div > div > div {
+    background: linear-gradient(90deg, var(--vy-accent), #8BA4BC) !important;
+}
+
+.stProgress > div > div > div {
+    background-color: rgba(18, 9, 10, 0.6) !important;
+}
+
+div[data-baseweb="tab-list"] {
+    background: rgba(18, 9, 10, 0.5);
+    border-radius: 10px;
+    padding: 4px;
+    gap: 4px;
+}
+
+button[data-baseweb="tab"] {
+    background: transparent !important;
+    color: var(--vy-text-muted) !important;
+    border-radius: 8px !important;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    background: var(--vy-card) !important;
+    color: var(--vy-text-primary) !important;
+}
+
+.stTextInput > div > div > input {
+    background: rgba(18, 9, 10, 0.65) !important;
+    border: 1px solid var(--vy-card-border) !important;
+    color: var(--vy-text-primary) !important;
+    border-radius: 8px !important;
+}
+
+.stSelectbox > div > div {
+    background: rgba(18, 9, 10, 0.65) !important;
+    border-color: var(--vy-card-border) !important;
+    color: var(--vy-text-primary) !important;
+}
+
+.stFileUploader {
+    background: rgba(18, 9, 10, 0.4);
+    border: 1px dashed var(--vy-card-border);
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.stAlert {
+    background: rgba(58, 36, 32, 0.85) !important;
+    border: 1px solid var(--vy-card-border) !important;
+    color: var(--vy-text-primary) !important;
+}
+
+.home-hero {
+    min-height: calc(100vh - 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 1rem 1rem;
+    margin-top: -0.75rem;
+}
+
+.home-hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.home-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+}
+
+.home-hero-actions {
+    margin-top: 0.25rem;
+    width: min(280px, 100%);
+}
+
+.home-hero-inner [data-testid="stImage"] {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.2rem;
+}
+
+.vy-preview-placeholder {
+    background: var(--vy-card);
+    border: 1px dashed var(--vy-card-border);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.vy-preview-placeholder h4 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--vy-text-primary) !important;
+}
+
+.vy-preview-placeholder p {
+    margin: 0;
+    color: var(--vy-text-secondary) !important;
+    line-height: 1.55;
+}
+    color: var(--vy-text-secondary) !important;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+}
+
+/* ——— Full-screen image dialog ——— */
+[data-testid="stDialog"],
+div[role="dialog"] {
+    background: linear-gradient(165deg, #1A0F10 0%, #2A1816 100%) !important;
+    border: 1px solid var(--vy-card-border) !important;
+}
+
+[data-testid="stDialog"] h1,
+[data-testid="stDialog"] p,
+[data-testid="stDialog"] span,
+[data-testid="stDialog"] label,
+div[role="dialog"] p,
+div[role="dialog"] span {
+    color: var(--vy-text-primary) !important;
+}
+
+.vy-dialog-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #F2E8E4 !important;
+    text-align: center;
+    margin: 0 0 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--vy-card-border);
+}
+
+[data-testid="stDialog"] button[aria-label="Close"],
+div[role="dialog"] button[aria-label="Close"] {
+    color: #FFFFFF !important;
+    background: rgba(91, 124, 153, 0.5) !important;
+    border-radius: 6px !important;
+}
+
+.vy-metric-value.skipped {
+    font-size: 0.95rem;
+    color: var(--vy-text-muted) !important;
+    font-style: italic;
+}
+
+.login-container {
+    max-width: 420px;
+    margin: 2rem auto;
+}
+
+.logo-missing {
+    color: var(--vy-text-muted);
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 1rem;
+    border: 1px dashed var(--vy-card-border);
+    border-radius: 8px;
+}
