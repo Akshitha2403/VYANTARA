@@ -107,7 +107,6 @@ def run_complete_pipeline(image_path: str) -> None:
             from inference.inference import load_model
             load_model()
         except Exception as exc:
-                import traceback
                 traceback.print_exc()      # Prints full traceback to Streamlit logs
                 st.exception(exc)
                           # Shows the full exception in the UI
