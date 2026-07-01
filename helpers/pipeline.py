@@ -101,14 +101,17 @@ def run_complete_pipeline(image_path: str) -> None:
             raise FileNotFoundError(f"Sample image missing: {image_path}")
 
         # STEP 0 — Loading AI Model
+        # STEP 0 — Loading AI Model
         _set_progress(0, progress_bar, stage_placeholder)
         try:
             from inference.inference import load_model
-
             load_model()
-        except Exception as exc:
-            _fail_stage("Loading AI Model", exc)
-            return
+            except Exception as exc:
+                import traceback
+                traceback.print_exc()      # Prints full traceback to Streamlit logs
+                st.exception(exc)          # Shows the full exception in the UI
+                _fail_stage("Loading AI Model", exc)
+                return
 
         # STEP 1 — Inference
         _set_progress(1, progress_bar, stage_placeholder)
